@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const serverless = require('serverless-http');
 const { connectDB } = require("./config/database");
 const authRoutes = require("./routes/auth.routes");
 const productRoutes = require("./routes/product.routes");
@@ -21,17 +20,14 @@ const userAnalyticsRoutes = require("./routes/userAnalytics.routes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
 // ===============================
 // Middlewares
 // ===============================
-
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-    "/uploads",
-    express.static(path.join(__dirname, "uploads"))
-);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // ===============================
 // API Routes
@@ -46,7 +42,6 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/admin", adminAuthRoutes);
 app.use("/api/admin/dashboard", adminDashboardRoutes);
 app.use("/api/admin", companyRoutes);
-app.use("/uploads", express.static("uploads"));
 app.use("/api/admin/analytics", analyticsRoutes);
 app.use("/api/forgot-password", forgotPasswordRoutes);
 app.use("/api/reports", reportRoutes);
@@ -61,7 +56,6 @@ app.use((req, res) => {
         message: "Route Not Found",
     });
 });
-
 
 // ===============================
 // Start Server
@@ -88,6 +82,3 @@ const startServer = async () => {
 };
 
 startServer();
-
-module.exports = app;
-module.exports.handler = serverless(app);
