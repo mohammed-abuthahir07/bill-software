@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-
+const serverless = require('serverless-http');
 const { connectDB } = require("./config/database");
 const authRoutes = require("./routes/auth.routes");
 const productRoutes = require("./routes/product.routes");
@@ -62,6 +62,7 @@ app.use((req, res) => {
     });
 });
 
+
 // ===============================
 // Start Server
 // ===============================
@@ -87,3 +88,6 @@ const startServer = async () => {
 };
 
 startServer();
+
+module.exports = app;
+module.exports.handler = serverless(app);

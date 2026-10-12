@@ -68,7 +68,7 @@ CREATE TABLE `invoice_items` (
   KEY `product_id` (`product_id`),
   CONSTRAINT `invoice_items_ibfk_1` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`) ON DELETE CASCADE,
   CONSTRAINT `invoice_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,6 +77,7 @@ CREATE TABLE `invoice_items` (
 
 LOCK TABLES `invoice_items` WRITE;
 /*!40000 ALTER TABLE `invoice_items` DISABLE KEYS */;
+INSERT INTO `invoice_items` VALUES (1,1,2,'idli podi 250g','Masala & Spices','weewwe',1,175.00,2.00,178.50,250.00,'g',175.00);
 /*!40000 ALTER TABLE `invoice_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +107,7 @@ CREATE TABLE `invoices` (
   UNIQUE KEY `invoice_number` (`invoice_number`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `invoices_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,6 +116,7 @@ CREATE TABLE `invoices` (
 
 LOCK TABLES `invoices` WRITE;
 /*!40000 ALTER TABLE `invoices` DISABLE KEYS */;
+INSERT INTO `invoices` VALUES (1,1,'INV-1787659641138','Mohammed Abuthahir','abuthahirmohammed6@gmail.com','22AAAA000025','Mohammed Abuthahir','abuthahirmohammed6@gmail.com','22AAAA000026','south gate madurai',175.00,3.50,178.50,'2026-08-25 12:07:21');
 /*!40000 ALTER TABLE `invoices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +164,7 @@ CREATE TABLE `products` (
   `description` text,
   `gst` decimal(5,2) DEFAULT '0.00',
   `package_weight` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `weight_unit` enum('g','kg') NOT NULL DEFAULT 'g',
+  `weight_unit` varchar(20) NOT NULL DEFAULT 'g',
   `selling_price` decimal(10,2) NOT NULL DEFAULT '0.00',
   `quantity` int NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -170,7 +172,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `products_user_id` (`user_id`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,6 +181,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,1,'idli podi','Masala & Spices','SKU01','thus is idli',2.00,100.00,'g',70.00,20,'2026-08-25 12:03:30','2026-08-25 12:03:30'),(2,1,'idli podi','Masala & Spices','SKU02','weewwe',2.00,250.00,'g',175.00,9,'2026-08-25 12:04:12','2026-08-25 12:07:21'),(3,1,'Sambar podi','Masala & Spices','SKU03','this is sambar podi',2.00,100.00,'g',70.00,5,'2026-08-25 12:05:28','2026-08-25 12:05:28');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,7 +211,7 @@ CREATE TABLE `user_profiles` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`),
   CONSTRAINT `fk_user_profile` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,6 +220,7 @@ CREATE TABLE `user_profiles` (
 
 LOCK TABLES `user_profiles` WRITE;
 /*!40000 ALTER TABLE `user_profiles` DISABLE KEYS */;
+INSERT INTO `user_profiles` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/uploads/profile/profile-1-1787660528222.png','2026-08-25 12:20:56','2026-08-25 12:22:08');
 /*!40000 ALTER TABLE `user_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +240,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,6 +249,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Mohammed Abuthahir','abuthahirmohammed6@gmail.com','$2b$10$d0BCHAlVjVXb2JGBAKbKIuyepc1p1YZ9NQS0Ekb14rMegrMeQFf5S','2026-08-25 12:01:56','2026-08-25 12:01:56');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -257,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-08-17 15:34:59
+-- Dump completed on 2026-09-07  9:00:29
